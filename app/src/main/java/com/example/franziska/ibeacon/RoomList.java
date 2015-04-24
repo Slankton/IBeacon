@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class RoomList extends ActionBarActivity {
@@ -11,9 +12,9 @@ public class RoomList extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_room_list);
+        setContentView(R.layout.raumliste_prototyp);
+        // setContentView(R.layout.activity_room_list);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,5 +36,15 @@ public class RoomList extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // Aufrufen des Raumplan-Layouts
+    public void showRoom (View view) {
+        setContentView(R.layout.raumplan_layout);
+    }
+
+    // zurück zum Start-Layout
+    public void back (View view) {
+        setContentView(R.layout.raumliste_prototyp);
     }
 }

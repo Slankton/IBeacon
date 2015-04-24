@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/raumplan001viertelgroesse368x600">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/raum130"
+        android:id="@+id/textViewRaum130"
+        android:textSize="20dp"
+        android:layout_marginTop="81dp"
+        android:layout_below="@+id/button4"
+        android:layout_toEndOf="@+id/button4" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/raum129"
+        android:id="@+id/textViewRaum129"
+        android:textSize="20dp"
+        android:layout_marginBottom="99dp"
+        android:layout_above="@+id/textViewRaum128"
+        android:layout_alignStart="@+id/textViewRaum130" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/raum128"
+        android:id="@+id/textViewRaum128"
+        android:textSize="20dp"
+        android:layout_marginBottom="94dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textViewRaum129" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="zurück"
+        android:id="@+id/button4"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="59dp"
+        android:onClick="back" />
+</RelativeLayout>
