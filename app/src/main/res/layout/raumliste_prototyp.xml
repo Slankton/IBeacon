@@ -72,7 +72,9 @@
         android:text="Raum wählen"
         android:layout_marginTop="110dp"
         android:layout_marginLeft="130dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginRight="20dp"
+        android:nestedScrollingEnabled="false"
+        android:onClick="showRoom" />
 
 
     <View
