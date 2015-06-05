@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 public class RoomList extends ActionBarActivity {
 
         int REQUEST_ENABLE_BT = 5;
+        View standort2;
 
 
     @Override
@@ -22,7 +24,9 @@ public class RoomList extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.raumliste_prototyp);
         // setContentView(R.layout.activity_room_list);
-        isBluetoothOn();
+        //isBluetoothOn();
+        standort2 = (View) findViewById(R.id.standort2);
+
     }
 
     @Override
@@ -50,6 +54,7 @@ public class RoomList extends ActionBarActivity {
     // Aufrufen des Raumplan-Layouts
     public void showRoom(View view) {
         setContentView(R.layout.raumplan_layout);
+        standortAnzeigen();
     }
 
     // zurück zum Start-Layout
@@ -99,6 +104,11 @@ public class RoomList extends ActionBarActivity {
                 msgBox.show();
             }
         }
+    }
+
+    public void standortAnzeigen() {
+        Toast.makeText(getApplicationContext(), "Hier ist ein Toast",Toast.LENGTH_SHORT).show();
+        standort2.setBackgroundColor(Color.BLUE);
     }
 }
 
