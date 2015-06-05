@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/IBeacon.iml" filepath="$PROJECT_DIR$/IBeacon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OnyxBeaconLibrary/OnyxBeaconLibrary.iml" filepath="$PROJECT_DIR$/OnyxBeaconLibrary/OnyxBeaconLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-beacon-library-2.1.4/android-beacon-library-2.1.4.iml" filepath="$PROJECT_DIR$/android-beacon-library-2.1.4/android-beacon-library-2.1.4.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ibeaconstest/ibeaconstest.iml" filepath="$PROJECT_DIR$/ibeaconstest/ibeaconstest.iml" />
     </modules>
   </component>
 </project>

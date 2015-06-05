@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">IBeaconsTest</string>
+
+    <string name="beacon">Beacon</string>
+    <string name="action_settings">Settings</string>
+    <string name="beac">Medium Text</string>
+</resources>
