@@ -41,20 +41,20 @@
         android:layout_marginTop="59dp"
         android:onClick="back" />
 
-    <Button
+    <View
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginTop="150dp"
         android:layout_marginLeft="215dp"
         android:id="@+id/standort1"
-        android:background="#ff0000"
-        android:enabled="false" />
+        android:background="#ff0000" />
 
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginTop="220dp"
         android:layout_marginLeft="215dp"
+        android:background="#ff0000"
         android:id="@+id/standort2" />
 
     <View
@@ -62,6 +62,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="300dp"
         android:layout_marginLeft="215dp"
+        android:background="#ff0000"
         android:id="@+id/standort3" />
 
     <View
@@ -69,6 +70,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="360dp"
         android:layout_marginLeft="215dp"
+        android:background="#ff0000"
         android:id="@+id/standort4" />
 
     <View
@@ -76,7 +78,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="420dp"
         android:layout_marginLeft="215dp"
-
+        android:background="#ff0000"
         android:id="@+id/standort5" />
 
     <View
@@ -84,6 +86,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="490dp"
         android:layout_marginLeft="215dp"
+        android:background="#ff0000"
         android:id="@+id/standort6" />
 
     <View
@@ -91,6 +94,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="520dp"
         android:layout_marginLeft="215dp"
+        android:background="#ff0000"
         android:id="@+id/standort7" />
 
 </RelativeLayout>

@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class RoomList extends ActionBarActivity {
 
         int REQUEST_ENABLE_BT = 5;
-        View standort2;
+        DoorCalculator doorCalculator;
 
 
     @Override
@@ -25,8 +25,7 @@ public class RoomList extends ActionBarActivity {
         setContentView(R.layout.raumliste_prototyp);
         // setContentView(R.layout.activity_room_list);
         //isBluetoothOn();
-        standort2 = (View) findViewById(R.id.standort2);
-
+        doorCalculator = new DoorCalculator();
     }
 
     @Override
@@ -62,8 +61,8 @@ public class RoomList extends ActionBarActivity {
         setContentView(R.layout.raumliste_prototyp);
     }
 
-    public void toastAnzeigen(View view) {
-        Toast.makeText(getApplicationContext(), "Ziel erreicht, Raum gefunden",Toast.LENGTH_SHORT).show();
+    public void toastAnzeigen(String message) {
+        Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
     }
 
     public void isBluetoothOn() {
@@ -106,9 +105,65 @@ public class RoomList extends ActionBarActivity {
         }
     }
 
+    public void standorteInvisible(View[] standorte) {
+        for (int i = 0; i < standorte.length; i++) {
+            standorte[i].setVisibility(View.INVISIBLE);
+        }
+    }
+
     public void standortAnzeigen() {
-        Toast.makeText(getApplicationContext(), "Hier ist ein Toast",Toast.LENGTH_SHORT).show();
-        standort2.setBackgroundColor(Color.BLUE);
+
+        View [] standorte = new View[7];
+
+        standorte[0] = (View) findViewById(R.id.standort1);
+        standorte[1] = (View) findViewById(R.id.standort2);
+        standorte[2] = (View) findViewById(R.id.standort3);
+        standorte[3] = (View) findViewById(R.id.standort4);
+        standorte[4] = (View) findViewById(R.id.standort5);
+        standorte[5] = (View) findViewById(R.id.standort6);
+        standorte[6] = (View) findViewById(R.id.standort7);
+
+        standorteInvisible(standorte);
+
+         if (doorCalculator.getDoor() == 0.0) {
+            standorteInvisible(standorte);
+            toastAnzeigen("Raum nicht in Reichweite");
+        }
+
+        if (doorCalculator.getDoor() == 0.5) {
+            standorteInvisible(standorte);
+            standorte[0].setVisibility(View.VISIBLE);
+        }
+
+        if (doorCalculator.getDoor() == 1.0) {
+            standorteInvisible(standorte);
+            standorte[1].setVisibility(View.VISIBLE);
+        }
+
+        if (doorCalculator.getDoor() == 1.5) {
+            standorteInvisible(standorte);
+            standorte[2].setVisibility(View.VISIBLE);
+        }
+
+        if (doorCalculator.getDoor() == 2.0) {
+            standorteInvisible(standorte);
+            standorte[3].setVisibility(View.VISIBLE);
+        }
+
+        if (doorCalculator.getDoor() == 2.5) {
+            standorteInvisible(standorte);
+            standorte[4].setVisibility(View.VISIBLE);
+        }
+
+        if (doorCalculator.getDoor() == 3.0) {
+            standorteInvisible(standorte);
+            standorte[5].setVisibility(View.VISIBLE);
+        }
+
+        if (doorCalculator.getDoor() == 3.5) {
+            standorteInvisible(standorte);
+            standorte[6].setVisibility(View.VISIBLE);
+        }
     }
 }
 
