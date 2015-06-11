@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/raumplan001viertelgroesse368x600">
+    android:background="@drawable/raumplan368x640">
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="210dp"
         android:layout_marginLeft="215dp"
         android:background="#ff0000"
         android:id="@+id/standort2" />
@@ -60,7 +60,7 @@
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="280dp"
         android:layout_marginLeft="215dp"
         android:background="#ff0000"
         android:id="@+id/standort3" />
@@ -68,7 +68,7 @@
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="335dp"
         android:layout_marginLeft="215dp"
         android:background="#ff0000"
         android:id="@+id/standort4" />
@@ -76,7 +76,7 @@
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="400dp"
         android:layout_marginLeft="215dp"
         android:background="#ff0000"
         android:id="@+id/standort5" />
@@ -84,7 +84,7 @@
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="490dp"
+        android:layout_marginTop="458dp"
         android:layout_marginLeft="215dp"
         android:background="#ff0000"
         android:id="@+id/standort6" />
@@ -92,7 +92,7 @@
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="490dp"
         android:layout_marginLeft="215dp"
         android:background="#ff0000"
         android:id="@+id/standort7" />
