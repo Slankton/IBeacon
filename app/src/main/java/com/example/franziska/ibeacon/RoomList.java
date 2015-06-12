@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -109,6 +110,25 @@ public class RoomList extends ActionBarActivity {
         for (int i = 0; i < standorte.length; i++) {
             standorte[i].setVisibility(View.INVISIBLE);
         }
+    }
+
+    public void suchen(View view) {
+        EditText searchField = (EditText) findViewById(R.id.room_search_field);
+        String eingabe = searchField.getText().toString();
+        toastAnzeigen(eingabe);
+        if( eingabe.equals("2-128")) {
+            findViewById(R.id.button_128).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_128).setVisibility(View.VISIBLE);
+        }
+        if( eingabe.equals("2-129")) {
+            findViewById(R.id.button_129).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_129).setVisibility(View.VISIBLE);
+        }
+        if( eingabe.equals("2-130")) {
+            findViewById(R.id.button_130).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_130).setVisibility(View.VISIBLE);
+        }
+
     }
 
     public void standortAnzeigen() {
