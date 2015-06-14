@@ -23,10 +23,11 @@ public class RoomList extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.raumliste_prototyp);
-        // setContentView(R.layout.activity_room_list);
+       // setContentView(R.layout.raumliste_prototyp);
+         setContentView(R.layout.raumplan_layout);
         //isBluetoothOn();
         doorCalculator = new DoorCalculator();
+
     }
 
     @Override
