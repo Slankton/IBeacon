@@ -5,28 +5,46 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.RemoteException;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.altbeacon.beacon.Beacon;
+import org.altbeacon.beacon.BeaconConsumer;
+import org.altbeacon.beacon.BeaconManager;
+import org.altbeacon.beacon.BeaconParser;
+import org.altbeacon.beacon.RangeNotifier;
+import org.altbeacon.beacon.Region;
 
-public class RoomList extends ActionBarActivity {
+import java.util.Collection;
+import java.util.Iterator;
 
-        int REQUEST_ENABLE_BT = 5;
-        DoorCalculator doorCalculator;
 
+public class RoomList extends ActionBarActivity implements BeaconConsumer {
+
+    int REQUEST_ENABLE_BT = 5;
+    public double door;
+    protected static final String TAG = "RangingActivity";
+    private BeaconManager beaconManager;
+    TextView view;
+    final static int tuerAbstand = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        // setContentView(R.layout.raumliste_prototyp);
          setContentView(R.layout.raumplan_layout);
-        //isBluetoothOn();
-        doorCalculator = new DoorCalculator();
+        door = 1;
+        beaconManager = BeaconManager.getInstanceForApplication(this);
+        beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
+        beaconManager.bind(this);
 
     }
 
@@ -146,45 +164,110 @@ public class RoomList extends ActionBarActivity {
 
         standorteInvisible(standorte);
 
-         if (doorCalculator.getDoor() == 0.0) {
+         if (this.getDoor() == 0.0) {
             standorteInvisible(standorte);
             toastAnzeigen("Raum nicht in Reichweite");
         }
 
-        if (doorCalculator.getDoor() == 0.5) {
+        if (getDoor() == 0.5) {
             standorteInvisible(standorte);
             standorte[0].setVisibility(View.VISIBLE);
         }
 
-        if (doorCalculator.getDoor() == 1.0) {
+        if (getDoor() == 1.0) {
             standorteInvisible(standorte);
             standorte[1].setVisibility(View.VISIBLE);
         }
 
-        if (doorCalculator.getDoor() == 1.5) {
+        if (getDoor() == 1.5) {
             standorteInvisible(standorte);
             standorte[2].setVisibility(View.VISIBLE);
         }
 
-        if (doorCalculator.getDoor() == 2.0) {
+        if (getDoor() == 2.0) {
             standorteInvisible(standorte);
             standorte[3].setVisibility(View.VISIBLE);
         }
 
-        if (doorCalculator.getDoor() == 2.5) {
+        if (getDoor() == 2.5) {
             standorteInvisible(standorte);
             standorte[4].setVisibility(View.VISIBLE);
         }
 
-        if (doorCalculator.getDoor() == 3.0) {
+        if (getDoor() == 3.0) {
             standorteInvisible(standorte);
             standorte[5].setVisibility(View.VISIBLE);
         }
 
-        if (doorCalculator.getDoor() == 3.5) {
+        if (getDoor() == 3.5) {
             standorteInvisible(standorte);
             standorte[6].setVisibility(View.VISIBLE);
         }
+    }
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        beaconManager.unbind(this);
+    }
+
+    @Override//Methode wird permanent ausgeführt, sobald ein Beacone entdeckt wurde
+    public void onBeaconServiceConnect() {
+        beaconManager.setRangeNotifier(new RangeNotifier() {
+            @Override
+            public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+                Beacon tuer1 = getBeaconByMinor(beacons, 1);
+                Beacon tuer2 = getBeaconByMinor(beacons, 2);
+                Beacon tuer3 = getBeaconByMinor(beacons, 3);
+                if (tuer1 != null & tuer2 != null & tuer3 != null) {
+                    //Steh ich vor einer der Türen
+                    if ((tuer1.getDistance() < tuer2.getDistance() && tuer2.getDistance() < tuer3.getDistance())) {
+                        if(tuer1.getDistance() < tuerAbstand)
+                         door = 1.0;
+                        else
+                            door = 0.5;
+                    } else if ((tuer1.getDistance() > tuer2.getDistance() && tuer2.getDistance() < tuer3.getDistance()) && tuer2.getDistance() < tuerAbstand) {
+                        door = 2.0;
+                    } else if ((tuer3.getDistance() < tuer2.getDistance() && tuer3.getDistance() < tuer1.getDistance()) ) {
+                        if(tuer3.getDistance() < tuerAbstand)
+                            door = 3.0;
+                        else
+                            door = 3.5;                    }
+                     else {//Bei keiner Tür
+                        door = 0;
+                    }
+                }
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        standortAnzeigen();
+
+                    }
+                });
+            }
+
+
+        });try {
+            beaconManager.startRangingBeaconsInRegion(new Region("myRangingUniqueId", null, null, null));
+        } catch ( RemoteException e ) {
+        }
+    }
+
+    private Beacon getBeaconByMinor(Collection<Beacon> beacons, int i) {
+        Iterator<Beacon> iter = beacons.iterator();
+        while (iter.hasNext()) {
+            Beacon tmp = iter.next();
+            if (tmp.getId3().toInt() == i) {
+                return tmp;
+            }
+        }
+        return null;
+    }
+
+
+    public double getDoor() {
+        return door;
     }
 }
 
