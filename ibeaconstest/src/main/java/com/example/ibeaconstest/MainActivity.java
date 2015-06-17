@@ -21,7 +21,7 @@ public class MainActivity extends Activity implements BeaconConsumer {
     protected static final String TAG = "RangingActivity";
     private BeaconManager beaconManager;
     TextView view;
-    final static int tuerAbstand = 4 / 4;
+    final static int tuerAbstand = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,25 +51,19 @@ public class MainActivity extends Activity implements BeaconConsumer {
                                                Beacon tuer3 = getBeaconByMinor(beacons, 3);
                                                if (tuer1 != null & tuer2 != null & tuer3 != null) {
                                                    final String ausgabe;
-                                                   if ((tuer1.getDistance() < tuer2.getDistance() && tuer1.getDistance() < tuer2.getDistance()) && tuer1.getDistance() < tuerAbstand) {
+                                                   if ((tuer1.getDistance() < tuer2.getDistance() && tuer2.getDistance() < tuer3.getDistance()) && tuer1.getDistance() < tuerAbstand) {
                                                        Log.i(TAG, "Sie stehen vor Tür1");
                                                        ausgabe = "Sie stehen vor Tür1";
-                                                   } else if((tuer1.getDistance() > tuer2.getDistance() && tuer2.getDistance() < tuer3.getDistance()) && (tuer1.getDistance() > tuerAbstand && tuer2.getDistance() > tuerAbstand)){
-                                                       Log.i(TAG, "Sie stehen zwischen Tür1 und Tür2");
-                                                       ausgabe = "Sie stehen zwischen Tür1 und Tür2";
                                                    } else if ((tuer1.getDistance() > tuer2.getDistance() && tuer2.getDistance() < tuer3.getDistance()) && tuer2.getDistance() < tuerAbstand) {
                                                        Log.i(TAG, "Sie stehen vor Tür2");
                                                        ausgabe = "Sie stehen vor Tür2";
-                                                   } else if ((tuer3.getDistance() < tuer2.getDistance() && tuer3.getDistance() < tuer1.getDistance()) && (tuer1.getDistance() > tuerAbstand && tuer2.getDistance() > tuerAbstand)) {
-                                                       Log.i(TAG, "Sie stehen zwischen Tür2 und Tür3");
-                                                       ausgabe = "Sie stehen zwischen Tür2 und Tür3";
                                                    }
                                                    else if ((tuer3.getDistance() < tuer2.getDistance() && tuer3.getDistance() < tuer1.getDistance()) && tuer3.getDistance() < tuerAbstand) {
                                                        Log.i(TAG, "Sie stehen vor Tür3");
                                                        ausgabe = "Sie stehen vor Tür3";
                                                    } else {
                                                        Log.i(TAG, "Sie stehen vor keiner Tür");
-                                                       ausgabe = "Sie stehen vor keiner Tür oder zwischen einer";
+                                                       ausgabe = "Sie stehen vor keiner Tür";
                                                    }
                                                    runOnUiThread(new Runnable() {
                                                        public void run() {

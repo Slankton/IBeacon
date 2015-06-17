@@ -5,67 +5,44 @@
 
     <EditText
         android:id="@+id/room_search_field"
-        android:layout_width="365dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="405dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="10dp"
-        />
-    <TextView android:text="Raum suchen:"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="410dp"
-        android:layout_marginLeft="5dp"/>
-    <TextView android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="7dp"
-        android:layout_marginLeft="5dp"/>
-    <View
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
+        android:layout_height="40dp"
         android:background="@android:color/darker_gray"
-        android:layout_marginTop="55dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_toStartOf="@+id/button2" />
 
     <!--
         WEGFINDUNGS-LINIEN
     -->
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
     <View
         android:layout_width="5dp"
         android:layout_height="100dp"
         android:layout_marginTop="400dp"
         android:layout_marginLeft="300dp"
         android:background="@android:color/holo_red_dark"
-        />
+        android:id="@+id/view"
+        android:visibility="invisible" />
     <View
         android:layout_width="50dp"
         android:layout_height="5dp"
         android:layout_marginTop="495dp"
         android:layout_marginLeft="250dp"
         android:background="@android:color/holo_red_dark"
-        android:visibility="visible"/>
+        android:visibility="invisible"
+        android:id="@+id/view2" />
     <!-- -->
 
 
-    <View
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginLeft="70dp"
-        android:background="@android:color/holo_blue_dark"
-        android:id="@+id/raum_1"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="20dp"
-        android:text="2-124"
+        android:text="2-128"
+        android:id="@+id/text_128"
         android:layout_marginTop="120dp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="20dp"
+        android:visibility="invisible" />
     <Button
         android:layout_width="fill_parent"
         android:layout_height="40dp"
@@ -74,73 +51,50 @@
         android:layout_marginLeft="130dp"
         android:layout_marginRight="20dp"
         android:nestedScrollingEnabled="false"
-        android:onClick="showRoom" />
+        android:onClick="showRoom"
+        android:id="@+id/button_128"
+        android:visibility="invisible" />
 
 
-    <View
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginLeft="70dp"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/raum_2"/>
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="20dp"
-        android:text="2-128"
-        android:layout_marginTop="180dp"
-        android:layout_marginLeft="20dp"/>
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:text="Raum wählen"
-        android:layout_marginTop="170dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginRight="20dp"/>
-
-
-    <View
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginLeft="70dp"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/raum_3"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="20dp"
         android:text="2-129"
-        android:layout_marginTop="240dp"
-        android:layout_marginLeft="20dp"/>
+        android:id="@+id/text_129"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="20dp"
+        android:visibility="invisible" />
     <Button
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:text="Raum wählen"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="110dp"
         android:layout_marginLeft="130dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginRight="20dp"
+        android:id="@+id/button_129"
+        android:visibility="invisible"
+        android:onClick="showRoom" />
 
 
-    <View
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="70dp"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/raum_4"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="20dp"
         android:text="2-130"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="20dp"/>
+        android:id="@+id/text_130"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="20dp"
+        android:visibility="invisible" />
     <Button
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:text="Raum wählen"
-        android:layout_marginTop="290dp"
+        android:layout_marginTop="110dp"
         android:layout_marginLeft="130dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginRight="20dp"
+        android:id="@+id/button_130"
+        android:visibility="invisible" />
+
+
 
     <View
         android:layout_width="10dp"
@@ -148,6 +102,17 @@
         android:layout_marginTop="300dp"
         android:layout_marginLeft="250dp"
         android:background="@android:color/holo_blue_bright"
-        android:id="@+id/ort"/>
+        android:id="@+id/ort"
+        android:visibility="invisible" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Suchen"
+        android:id="@+id/button2"
+        android:layout_alignTop="@+id/room_search_field"
+        android:layout_alignEnd="@+id/button_128"
+        android:layout_marginRight="-10dp"
+        android:onClick="suchen" />
 
 </RelativeLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/raumplan001viertelgroesse368x600">
+    android:background="@drawable/raumkarte2_368x640">
 
     <TextView
         android:layout_width="wrap_content"
@@ -9,17 +9,15 @@
         android:text="@string/raum130"
         android:id="@+id/textViewRaum130"
         android:textSize="20dp"
-        android:layout_marginTop="81dp"
-        android:layout_below="@+id/button4"
-        android:layout_toEndOf="@+id/button4" />
+        android:layout_below="@+id/standort1"
+        android:layout_marginLeft="70dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/raum129"
         android:id="@+id/textViewRaum129"
         android:textSize="20dp"
-        android:layout_marginBottom="99dp"
-        android:layout_above="@+id/textViewRaum128"
+        android:layout_below="@+id/standort3"
         android:layout_alignStart="@+id/textViewRaum130" />
     <TextView
         android:layout_width="wrap_content"
@@ -27,70 +25,75 @@
         android:text="@string/raum128"
         android:id="@+id/textViewRaum128"
         android:textSize="20dp"
-        android:layout_marginBottom="94dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/standort5"
         android:layout_alignStart="@+id/textViewRaum129" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="zurück"
-        android:id="@+id/button4"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="59dp"
-        android:onClick="back" />
-
-    <Button
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="215dp"
-        android:id="@+id/standort1"
-        android:background="#ff0000"
-        android:enabled="false" />
 
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="220dp"
-        android:layout_marginLeft="215dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="252dp"
+        android:id="@+id/standort1"
+        android:background="#ff0000" />
+
+    <View
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="210dp"
+        android:layout_marginLeft="252dp"
+        android:background="#ff0000"
         android:id="@+id/standort2" />
 
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="215dp"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="252dp"
+        android:background="#ff0000"
         android:id="@+id/standort3" />
 
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="360dp"
-        android:layout_marginLeft="215dp"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="252dp"
+        android:background="#ff0000"
         android:id="@+id/standort4" />
 
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="420dp"
-        android:layout_marginLeft="215dp"
-
+        android:layout_marginTop="390dp"
+        android:layout_marginLeft="252dp"
+        android:background="#ff0000"
         android:id="@+id/standort5" />
 
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="490dp"
-        android:layout_marginLeft="215dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginLeft="252dp"
+        android:background="#ff0000"
         android:id="@+id/standort6" />
 
     <View
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="520dp"
-        android:layout_marginLeft="215dp"
+        android:layout_marginTop="510dp"
+        android:layout_marginLeft="252dp"
+        android:background="#ff0000"
         android:id="@+id/standort7" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zurück"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:onClick="back"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:background="@android:color/holo_orange_light" />
 
 </RelativeLayout>
