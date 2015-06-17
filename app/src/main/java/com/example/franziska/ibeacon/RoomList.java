@@ -34,7 +34,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer {
     protected static final String TAG = "RangingActivity";
     private BeaconManager beaconManager;
     TextView view;
-    final static int tuerAbstand = 2;
+    final static int tuerAbstand = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
