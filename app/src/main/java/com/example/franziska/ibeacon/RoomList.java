@@ -1,10 +1,15 @@
 package com.example.franziska.ibeacon;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.RemoteException;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,7 +17,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,29 +35,49 @@ import java.util.Collection;
 import java.util.Iterator;
 
 
-public class RoomList extends ActionBarActivity implements BeaconConsumer {
+public class RoomList extends ActionBarActivity implements BeaconConsumer, SensorEventListener {
 
     int REQUEST_ENABLE_BT = 5;
     public double door;
     protected static final String TAG = "RangingActivity";
     private BeaconManager beaconManager;
     TextView view;
-    final static int tuerAbstand = 2;
+    private ImageView mPointer;
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private Sensor mMagnetometer;
+    private float[] mLastAccelerometer = new float[3];
+    private float[] mLastMagnetometer = new float[3];
+    private boolean mLastAccelerometerSet = false;
+    private boolean mLastMagnetometerSet = false;
+    private float[] mR = new float[9];
+    private float[] mOrientation = new float[3];
+    private float mCurrentDegree = 0f;
+    private int verschiebemops;
+    private int ziel;
+    final static int tuerAbstand = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.raumliste_prototyp);
-         setContentView(R.layout.raumplan_layout);
+        // setContentView(R.layout.raumliste_prototyp);
+        setContentView(R.layout.raumplan_layout);
         isBluetoothOn();
         door = 1;
+        ziel = 2;
         beaconManager = BeaconManager.getInstanceForApplication(this);
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
         beaconManager.bind(this);
 
+        //setContentView(R.layout.test);
+        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        mPointer = (ImageView) findViewById(R.id.androidpointer);
+
     }
-    /*
-    @Override
+    //christophs zeuch auskommentiert wegen fehler!!
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_room_list, menu);
@@ -106,13 +134,13 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer {
             if (!mBluetoothAdapter.isEnabled()) {
                 AlertDialog.Builder msgBox = new AlertDialog.Builder(this);
                 msgBox.setMessage("Bluetooth ist ausgeschaltet, wird aber benötigt. Soll Bluetooth eingeschaltet werden?");
-                        msgBox.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                // Bluetooth einschalten
-                                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-                            }
-                        });
+                msgBox.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Bluetooth einschalten
+                        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                        startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+                    }
+                });
 
                 msgBox.setNegativeButton("Nein", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -165,7 +193,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer {
 
         standorteInvisible(standorte);
 
-         if (this.getDoor() == 0.0) {
+        if (this.getDoor() == 0.0) {
             standorteInvisible(standorte);
             toastAnzeigen("Raum nicht in Reichweite");
         }
@@ -226,7 +254,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer {
                     //Steh ich vor einer der Türen
                     if ((tuer1.getDistance() < tuer2.getDistance() && tuer2.getDistance() < tuer3.getDistance())) {
                         if(tuer1.getDistance() < tuerAbstand)
-                         door = 1.0;
+                            door = 1.0;
                         else
                             door = 0.5;
                     } else if ((tuer1.getDistance() > tuer2.getDistance() && tuer2.getDistance() < tuer3.getDistance()) && tuer2.getDistance() < tuerAbstand) {
@@ -236,10 +264,11 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer {
                             door = 3.0;
                         else
                             door = 3.5;                    }
-                     else {//Bei keiner Tür
+                    else {//Bei keiner Tür
                         door = 0;
                     }
                 }
+                berechnungsmops();
                 runOnUiThread(new Runnable() {
                     public void run() {
                         standortAnzeigen();
@@ -270,6 +299,64 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer {
     public double getDoor() {
         return door;
     }
+
+    private void berechnungsmops() { //ziel muss hier mit christophs variable ersetzt werden
+        if (ziel == door) //steht vor der tuer
+            verschiebemops = 10;
+        if (ziel < door) //steht ueber der tuer
+            verschiebemops = 105;
+        if (ziel > door) //steht unter der tuer
+            verschiebemops = 285;
+        if (door == 0) //steht nicht in der naehe eines beacons
+            verschiebemops = 0;
+    }
+
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this, mMagnetometer, SensorManager.SENSOR_DELAY_GAME);
+    }
+
+    protected void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(this, mAccelerometer);
+        mSensorManager.unregisterListener(this, mMagnetometer);
+    }
+
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor == mAccelerometer) {
+            System.arraycopy(event.values, 0, mLastAccelerometer, 0, event.values.length);
+            mLastAccelerometerSet = true;
+        } else if (event.sensor == mMagnetometer) {
+            System.arraycopy(event.values, 0, mLastMagnetometer, 0, event.values.length);
+            mLastMagnetometerSet = true;
+        }
+        if (mLastAccelerometerSet && mLastMagnetometerSet) {
+            SensorManager.getRotationMatrix(mR, null, mLastAccelerometer, mLastMagnetometer);
+            SensorManager.getOrientation(mR, mOrientation);
+            float azimuthInRadians = mOrientation[0];
+            float azimuthInDegress = (float)(Math.toDegrees(azimuthInRadians)+360)%360;
+            RotateAnimation ra = new RotateAnimation(
+                    mCurrentDegree,
+                    -azimuthInDegress,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF,
+                    0.5f);
+
+            ra.setDuration(250);
+
+            ra.setFillAfter(true);
+
+            mPointer.startAnimation(ra);
+            mCurrentDegree = -azimuthInDegress - verschiebemops;
+        }
+    }
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // TODO Auto-generated method stub
+
+    }
+
+
 }
 
 
