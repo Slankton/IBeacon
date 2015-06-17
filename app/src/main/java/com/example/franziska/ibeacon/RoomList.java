@@ -41,6 +41,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer {
         super.onCreate(savedInstanceState);
        // setContentView(R.layout.raumliste_prototyp);
          setContentView(R.layout.raumplan_layout);
+        isBluetoothOn();
         door = 1;
         beaconManager = BeaconManager.getInstanceForApplication(this);
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
