@@ -48,7 +48,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer {
         beaconManager.bind(this);
 
     }
-
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -70,7 +70,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer {
 
         return super.onOptionsItemSelected(item);
     }
-
+    */
     // Aufrufen des Raumplan-Layouts
     public void showRoom(View view) {
         setContentView(R.layout.raumplan_layout);
