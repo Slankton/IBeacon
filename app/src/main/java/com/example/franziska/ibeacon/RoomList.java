@@ -39,7 +39,9 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
 
     int REQUEST_ENABLE_BT = 5;
     public double door;
+    protected static final String TAG = "RangingActivity";
     private BeaconManager beaconManager;
+    TextView view;
     private ImageView mPointer;
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
@@ -53,31 +55,32 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
     private float mCurrentDegree = 0f;
     private int verschiebemops;
     private int ziel;
-    final static double tuerAbstand = 7.7 /2;
+    final static double tuerAbstand = 7.7;
+    boolean liste = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.raumliste_prototyp);
-        isBluetoothOn();
+        //isBluetoothOn();
+        liste = true;
         door = 1;
         ziel = 2;
         beaconManager = BeaconManager.getInstanceForApplication(this);
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
         beaconManager.bind(this);
-        mPointer = (ImageView) findViewById(R.id.androidpointer);
 
         //setContentView(R.layout.test);
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-
+        mPointer = (ImageView) findViewById(R.id.androidpointer);
     }
 
     // Aufrufen des Raumplan-Layouts
     public void showRoom(View view) {
         setContentView(R.layout.raumplan_layout);
-        mPointer = (ImageView) findViewById(R.id.androidpointer);
+        liste = false;
         standortAnzeigen();
     }
 
@@ -248,7 +251,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
         beaconManager.unbind(this);
     }
 
-    @Override//Methode wird permanent ausgeführt, sobald ein Beacone entdeckt wurde
+    @Override//Methode wird permanent ausgeführt, sobald ein Beacon entdeckt wurde
     public void onBeaconServiceConnect() {
         beaconManager.setRangeNotifier(new RangeNotifier() {
             @Override
@@ -273,6 +276,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
                 berechnungsmops();
                 runOnUiThread(new Runnable() {
                     public void run() {
+                        if(liste == false)
                         standortAnzeigen();
 
                     }
@@ -348,7 +352,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
             ra.setDuration(250);
 
             ra.setFillAfter(true);
-
+            if(mPointer != null)
             mPointer.startAnimation(ra);
             mCurrentDegree = -azimuthInDegress - verschiebemops;
         }
