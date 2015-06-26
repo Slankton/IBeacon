@@ -55,7 +55,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
     private float mCurrentDegree = 0f;
     private int verschiebemops;
     private int ziel;
-    final static int tuerAbstand = 5;
+    final static double tuerAbstand = 7.7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,7 +235,6 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
     }
 
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -255,15 +254,11 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
                     if ((tuer1.getDistance() < tuer2.getDistance() && tuer2.getDistance() < tuer3.getDistance())) {
                         if(tuer1.getDistance() < tuerAbstand)
                             door = 1.0;
-                        else
-                            door = 0.5;
                     } else if ((tuer1.getDistance() > tuer2.getDistance() && tuer2.getDistance() < tuer3.getDistance()) && tuer2.getDistance() < tuerAbstand) {
                         door = 2.0;
                     } else if ((tuer3.getDistance() < tuer2.getDistance() && tuer3.getDistance() < tuer1.getDistance()) ) {
                         if(tuer3.getDistance() < tuerAbstand)
-                            door = 3.0;
-                        else
-                            door = 3.5;                    }
+                            door = 3.0;                }
                     else {//Bei keiner Tür
                         door = 0;
                     }
