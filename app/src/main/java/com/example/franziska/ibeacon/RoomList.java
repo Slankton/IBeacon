@@ -140,6 +140,13 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
     }
 
     public void suchen(View view) {
+        findViewById(R.id.button_128).setVisibility(View.INVISIBLE);
+        findViewById(R.id.text_128).setVisibility(View.INVISIBLE);
+        findViewById(R.id.button_129).setVisibility(View.INVISIBLE);
+        findViewById(R.id.text_129).setVisibility(View.INVISIBLE);
+        findViewById(R.id.button_130).setVisibility(View.INVISIBLE);
+        findViewById(R.id.text_130).setVisibility(View.INVISIBLE);
+
         EditText searchField = (EditText) findViewById(R.id.room_search_field);
         String eingabe = searchField.getText().toString();
         //toastAnzeigen(eingabe);

@@ -70,7 +70,8 @@
         android:layout_marginLeft="130dp"
         android:layout_marginRight="20dp"
         android:id="@+id/button_130"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:onClick="showRoom" />
 
 
 
