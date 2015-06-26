@@ -39,9 +39,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
 
     int REQUEST_ENABLE_BT = 5;
     public double door;
-    protected static final String TAG = "RangingActivity";
     private BeaconManager beaconManager;
-    TextView view;
     private ImageView mPointer;
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
@@ -55,52 +53,31 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
     private float mCurrentDegree = 0f;
     private int verschiebemops;
     private int ziel;
-    final static double tuerAbstand = 7.7;
+    final static double tuerAbstand = 7.7 /2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.raumliste_prototyp);
-        setContentView(R.layout.raumplan_layout);
+        setContentView(R.layout.raumliste_prototyp);
         isBluetoothOn();
         door = 1;
         ziel = 2;
         beaconManager = BeaconManager.getInstanceForApplication(this);
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
         beaconManager.bind(this);
+        mPointer = (ImageView) findViewById(R.id.androidpointer);
 
         //setContentView(R.layout.test);
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        mPointer = (ImageView) findViewById(R.id.androidpointer);
 
     }
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_room_list, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     // Aufrufen des Raumplan-Layouts
     public void showRoom(View view) {
         setContentView(R.layout.raumplan_layout);
+        mPointer = (ImageView) findViewById(R.id.androidpointer);
         standortAnzeigen();
     }
 

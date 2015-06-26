@@ -101,11 +101,11 @@
         android:id="@+id/androidpointer"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginLeft="200dp"
         android:src="@drawable/androidpointer"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="25dp" />
 
     <ImageView
         android:layout_width="wrap_content"
