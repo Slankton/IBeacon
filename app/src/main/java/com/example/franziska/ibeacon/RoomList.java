@@ -60,7 +60,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.raumliste_prototyp);
+        //setContentView(R.layout.raumliste_prototyp);
         setContentView(R.layout.raumplan_layout);
         isBluetoothOn();
         door = 1;
@@ -163,7 +163,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
     public void suchen(View view) {
         EditText searchField = (EditText) findViewById(R.id.room_search_field);
         String eingabe = searchField.getText().toString();
-        toastAnzeigen(eingabe);
+        //toastAnzeigen(eingabe);
         if( eingabe.equals("2-128")) {
             findViewById(R.id.button_128).setVisibility(View.VISIBLE);
             findViewById(R.id.text_128).setVisibility(View.VISIBLE);
@@ -176,7 +176,38 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
             findViewById(R.id.button_130).setVisibility(View.VISIBLE);
             findViewById(R.id.text_130).setVisibility(View.VISIBLE);
         }
-
+        if( eingabe.equals("2") ) {
+            findViewById(R.id.button_128).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_128).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_129).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_129).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_130).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_130).setVisibility(View.VISIBLE);
+        }
+        if( eingabe.equals("2-") ) {
+            findViewById(R.id.button_128).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_128).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_129).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_129).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_130).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_130).setVisibility(View.VISIBLE);
+        }
+        if( eingabe.equals("2-1") ) {
+            findViewById(R.id.button_128).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_128).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_129).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_129).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_130).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_130).setVisibility(View.VISIBLE);
+        }
+        if( eingabe.equals("2-12") ) {
+            findViewById(R.id.button_128).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_128).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_129).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_129).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_130).setVisibility(View.VISIBLE);
+            findViewById(R.id.text_130).setVisibility(View.VISIBLE);
+        }
     }
 
     public void standortAnzeigen() {

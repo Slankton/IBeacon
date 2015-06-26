@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/ibeaconstest/ibeaconstest.iml" filepath="$PROJECT_DIR$/ibeaconstest/ibeaconstest.iml" />
       <module fileurl="file://$PROJECT_DIR$/sensorsimulator-2.0-rc1/sensorsimulator-2.0-rc1.iml" filepath="$PROJECT_DIR$/sensorsimulator-2.0-rc1/sensorsimulator-2.0-rc1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sensorsimulator-2.0-rc1/sensorsimulator-2.0-rc1.iml" filepath="$PROJECT_DIR$/sensorsimulator-2.0-rc1/sensorsimulator-2.0-rc1.iml" />
     </modules>
   </component>
 </project>
