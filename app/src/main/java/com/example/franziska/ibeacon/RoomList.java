@@ -3,6 +3,7 @@ package com.example.franziska.ibeacon;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,8 +20,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,19 +77,42 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        mPointer = (ImageView) findViewById(R.id.androidpointer);
     }
+
+
+    public void Room128(View view)
+    {
+        this.ziel = 3;
+        showRoom(view);
+    }
+
+    public void Room129(View view)
+    {
+        this.ziel = 2;
+        showRoom(view);
+    }
+
+    public void Room130(View view)
+    {
+        this.ziel = 1;
+        showRoom(view);
+    }
+
 
     // Aufrufen des Raumplan-Layouts
     public void showRoom(View view) {
         setContentView(R.layout.raumplan_layout);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         liste = false;
+        mPointer = (ImageView) findViewById(R.id.androidpointer);
         standortAnzeigen();
     }
 
     // zurück zum Start-Layout
     public void back(View view) {
         setContentView(R.layout.raumliste_prototyp);
+        liste = true;
     }
 
     public void toastAnzeigen(String message) {
@@ -270,12 +296,12 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
                     //Steh ich vor einer der Türen
                     if ((tuer1.getDistance() < tuer2.getDistance() && tuer2.getDistance() < tuer3.getDistance())) {
                         if(tuer1.getDistance() < tuerAbstand)
-                            door = 1.0;
+                            door = 3.0;
                     } else if ((tuer1.getDistance() > tuer2.getDistance() && tuer2.getDistance() < tuer3.getDistance()) && tuer2.getDistance() < tuerAbstand) {
                         door = 2.0;
                     } else if ((tuer3.getDistance() < tuer2.getDistance() && tuer3.getDistance() < tuer1.getDistance()) ) {
                         if(tuer3.getDistance() < tuerAbstand)
-                            door = 3.0;                }
+                            door = 1.0;                }
                     else {//Bei keiner Tür
                         door = 0;
                     }
@@ -284,7 +310,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
                 runOnUiThread(new Runnable() {
                     public void run() {
                         if(liste == false)
-                        standortAnzeigen();
+                            standortAnzeigen();
 
                     }
                 });
@@ -359,8 +385,8 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
             ra.setDuration(250);
 
             ra.setFillAfter(true);
-            if(mPointer != null)
-            mPointer.startAnimation(ra);
+            if(mPointer!=null)
+                mPointer.startAnimation(ra);
             mCurrentDegree = -azimuthInDegress - verschiebemops;
         }
     }

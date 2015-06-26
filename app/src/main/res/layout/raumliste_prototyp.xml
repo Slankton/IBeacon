@@ -29,7 +29,7 @@
         android:layout_marginLeft="130dp"
         android:layout_marginRight="20dp"
         android:nestedScrollingEnabled="false"
-        android:onClick="showRoom"
+        android:onClick="Room128"
         android:id="@+id/button_128"
         android:visibility="invisible" />
 
@@ -51,7 +51,7 @@
         android:layout_marginRight="20dp"
         android:id="@+id/button_129"
         android:visibility="invisible"
-        android:onClick="showRoom" />
+        android:onClick="Room129" />
 
 
     <TextView
@@ -71,7 +71,8 @@
         android:layout_marginRight="20dp"
         android:id="@+id/button_130"
         android:visibility="invisible"
-        android:onClick="showRoom" />
+        android:onClick="Room130"
+        android:nestedScrollingEnabled="false" />
 
 
 
