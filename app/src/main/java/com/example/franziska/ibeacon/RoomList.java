@@ -76,8 +76,7 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
         mPointer = (ImageView) findViewById(R.id.androidpointer);
 
     }
-    //christophs zeuch auskommentiert wegen fehler!!
-    /*@Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_room_list, menu);
@@ -97,8 +96,8 @@ public class RoomList extends ActionBarActivity implements BeaconConsumer, Senso
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    */
+    }*/
+
     // Aufrufen des Raumplan-Layouts
     public void showRoom(View view) {
         setContentView(R.layout.raumplan_layout);
